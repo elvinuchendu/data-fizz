@@ -1,12 +1,13 @@
 const axios = require('axios');
 const cheerio = require('cheerio');
+const browserObject = require('./browser');
 
-// console.log(2+6);
+//get request to walgreens
 axios
-    .get('https://jsonplaceholder.typicode.com/todos')
+    .get('https://www.walgreens.com/')
     .then((response) => {
         // Exact HTML content is stored inside `data` field
-        console.log(response.data)
+       const $ = cheerio.load(response.data)
     })
     .catch((error) => {
         console.error(error)
