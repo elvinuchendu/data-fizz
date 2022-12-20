@@ -12,12 +12,27 @@ const scraperObject = {
 			links = links.map(el => el.querySelector('li > a').href)
 			return links;
 		});
+        //Navigate to Household Essentials
+        let hEssentials = await browser.newPage();
+        await hEssentials.goto(urls[11]);
+        // Wait for the required DOM to be rendered
+		await page.waitForSelector('.content');
+		// Get the link to all the required links in the featured categories
+		let shopByNeedUrls = await page.$$eval('div.wag-row > div.wag-col-3 wag-col-md-6 wag-col-sm-6 CA__MT30', links1 => {
+			// Extract the links from the data
+			links1 = links1.map(el => el.querySelector('div > a').href)
+			return links1;
+		});
 
-        // Loop through each of those links, open a new page instance and get the relevant data from them
+		console.log(shopByNeedUrls);
+	}
+
+
+        // // Loop through each of those links, open a new page instance and get the relevant data from them
 		// let pagePromise = (link) => new Promise(async(resolve, reject) => {
 		// 	let dataObj = {};
-		// 	let newPage = await browser.newPage();
-		// 	await newPage.goto(urls[11]);
+		// 	// let newPage = await browser.newPage();
+		// 	// await newPage.goto(urls[11]);
 		// 	dataObj['bookTitle'] = await newPage.$eval('.product_main > h1', text => text.textContent);
 		// 	dataObj['bookPrice'] = await newPage.$eval('.price_color', text => text.textContent);
 		// 	dataObj['noAvailable'] = await newPage.$eval('.instock.availability', text => {
@@ -40,8 +55,6 @@ const scraperObject = {
 		// 	// scrapedData.push(currentPageData);
 		// 	console.log(currentPageData);
 		// }
-		console.log(urls);
-	}
     
 }
 
