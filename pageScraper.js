@@ -4,58 +4,24 @@ const scraperObject = {
 		let page = await browser.newPage();
 		console.log(`Navigating to ${this.url}...`);
 		await page.goto(this.url);
-		// Wait for the required DOM to be rendered
-		await page.waitForSelector('.CA__Featured-categories__full-width');
-		// Get the link to all the required links in the featured categories
-		let urls = await page.$$eval('.list__contain >  ul#at-hp-rp-featured-ul > li', links => {
-			// Extract the links from the data
-			links = links.map(el => el.querySelector('li > a').href)
-			return links;
-		});
-        //Navigate to Household Essentials
-        let hEssentials = await browser.newPage();
-        await hEssentials.goto(urls[11]);
-        // Wait for the required DOM to be rendered
-		await page.waitForSelector('.content');
-		// Get the link to all the required links in the featured categories
-		let shopByNeedUrls = await page.$$eval('div.wag-row > div.wag-col-3 wag-col-md-6 wag-col-sm-6 CA__MT30', links1 => {
-			// Extract the links from the data
-			links1 = links1.map(el => el.querySelector('div > a').href)
-			return links1;
-		});
 
-		console.log(shopByNeedUrls);
+        console.log(`Navigating to Household Essentials...`);
+        await page.goto('https://www.walgreens.com/store/c/household-essentials/ID=20000910-tier1?ban=dl_dl_FeatCategory_HouseholdEssentials_CONTROL' );
+
+        
+        console.log(`Navigating to Toilet Papers...`);
+        await page.goto('https://www.walgreens.com/store/c/toilet-paper/ID=20000944-tier3' );
+
+
+		await page.waitForSelector('section#productSection');
+		let urls = await page.$$eval('.product-card-container > ul.product-container > li', links => {
+		links = links.map(el => el.querySelector('a').href)
+		return links;
+		});
+        console.log(urls);
 	}
 
 
-        // // Loop through each of those links, open a new page instance and get the relevant data from them
-		// let pagePromise = (link) => new Promise(async(resolve, reject) => {
-		// 	let dataObj = {};
-		// 	// let newPage = await browser.newPage();
-		// 	// await newPage.goto(urls[11]);
-		// 	dataObj['bookTitle'] = await newPage.$eval('.product_main > h1', text => text.textContent);
-		// 	dataObj['bookPrice'] = await newPage.$eval('.price_color', text => text.textContent);
-		// 	dataObj['noAvailable'] = await newPage.$eval('.instock.availability', text => {
-		// 		// Strip new line and tab spaces
-		// 		text = text.textContent.replace(/(\r\n\t|\n|\r|\t)/gm, "");
-		// 		// Get the number of stock available
-		// 		let regexp = /^.*\((.*)\).*$/i;
-		// 		let stockAvailable = regexp.exec(text)[1].split(' ')[0];
-		// 		return stockAvailable;
-		// 	});
-		// 	dataObj['imageUrl'] = await newPage.$eval('#product_gallery img', img => img.src);
-		// 	dataObj['bookDescription'] = await newPage.$eval('#product_description', div => div.nextSibling.nextSibling.textContent);
-		// 	dataObj['upc'] = await newPage.$eval('.table.table-striped > tbody > tr > td', table => table.textContent);
-		// 	resolve(dataObj);
-		// 	await newPage.close();
-		// });
-        
-        // for(link in urls){
-		// 	let currentPageData = await pagePromise(urls[link]);
-		// 	// scrapedData.push(currentPageData);
-		// 	console.log(currentPageData);
-		// }
-    
 }
 
 
