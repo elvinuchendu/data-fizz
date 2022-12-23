@@ -7,12 +7,12 @@ const scraperObject = {
 		await page.goto(this.url);
 		let scrapedData = [];
 
-        console.log(`Navigating to Household Essentials...`);
-        await page.goto('https://www.walgreens.com/store/c/household-essentials/ID=20000910-tier1?ban=dl_dl_FeatCategory_HouseholdEssentials_CONTROL' );
+        console.log(`Navigating to Vitamins and Supplements...`);
+        await page.goto('https://www.walgreens.com/store/c/vitamins-and-supplements/ID=359441-tier1?ban=dl_dl_FeatCategory_VitaminsSupplements_CONTROL' );
 
         
-        console.log(`Navigating to Toilet Papers...`);
-        await page.goto('https://www.walgreens.com/store/c/toilet-paper/ID=20000944-tier3' );
+        console.log(`Navigating to Immunity Health...`);
+        await page.goto('https://www.walgreens.com/store/c/immune-support-supplements/ID=361449-tier3?ban=dl_dlvitaminstier_spot2' );
 
 
 		await page.waitForSelector('section#productSection');
