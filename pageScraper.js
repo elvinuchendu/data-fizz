@@ -1,3 +1,4 @@
+const fs = require('fs');
 const scraperObject = {
 	url: 'https://www.walgreens.com/',
 	async scraper(browser){
@@ -42,9 +43,14 @@ const scraperObject = {
 			scrapedData.push(currentPageData);
 			console.log(currentPageData);
 		}
-		
+		const data = JSON.stringify(scrapedData, null, 2)
+		fs.writeFile("data.json", data, 'utf8', function(err) {
+			if(err) {
+				return console.log(err);
+			}
+			console.log("The data has been scraped and saved successfully! View it at './data.json'");
+		});	
 	}
-
 
 }
 
