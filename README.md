@@ -1,10 +1,24 @@
 Web Crawler
 ========
 
-This web crawler provides a convenient way to gather data about various product listings on your favorite websites such as Walgreens, Walmart, etc...
+This web crawler provides a convenient way to gather data about various product listings on your favorite websites such as Walgreens, Walmart, etc... This scraper is currently set to scrape and output products in the Toilet Paper section of the Household essentials category.
 
-## Purpose
+## Prerequisites
 Installing / Getting started
+You would need to initialize npm through the below command.
+```
+npm init -y
+```
+Only one dependency is needed for this scraper. You will need to install puppeteer through the below command.
+
+```
+npm install puppeteer
+```
+
+========
+## Execution
+
+To execute the scraper
 A quick introduction of the minimal setup you need to get a hello world up & running.
 
 commands here

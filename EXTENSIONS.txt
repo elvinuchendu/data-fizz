@@ -1,1 +1,17 @@
-Products outside of the Household Essentials category
+
+This web crawler can be extended to categories outside of Vitamins & Supplements.
+
+This would require you to navigate to the 
+
+
+
+            ```
+			dataObj['productBrand'] = await newPage.$eval('#productName > div > a', el => el.textContent);
+			dataObj['productName'] = await newPage.$eval('#productTitle', el => el.textContent);
+			dataObj['listPrice'] = await newPage.$eval('span.product__price', el => el.textContent);
+            dataObj['description'] = await newPage.$eval('#prodDesc > div.inner > div.wag-accordion-tab-content', el => el.textContent);
+			dataObj['productDimensions'] = await newPage.$eval('div.inner > div > div > div.wag-accordion-shipping-content.mb20.ml20 > p.universal-product-inches', el => el.textContent);
+			dataObj['imageUrls'] = await newPage.$eval('#productImg', img => img.src);
+			dataObj['productUPC'] = await newPage.$eval('div.inner > div > div > div.wag-accordion-shipping-content.mb20.ml20 > p.universal-Item-code', el => el.textContent);
+            dataObj['sourceURL'] = await newPage.url('', el => el.textContent);
+            ```
