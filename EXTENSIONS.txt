@@ -1,8 +1,27 @@
 
-This web crawler can be extended to categories outside of Vitamins & Supplements.
+This web crawler can be extended to categories outside of Household Essentials.
 
-This would require you to navigate to the 
+You would utilize the page.goto method to navigate to the url that lists the products. For example to gather the data for immune support within Vitamins and Supplements, 
+I modified the urls within the page.goto method.(Beneath "console.log(`Navigating to Household Essentials...`)" and "console.log(`Navigating to Toilet Papers...`)" respectively to navigate to where the products were listed and the scraper able to gather the data no problem. As shown in the 
+"VAndSImmuneSupport.json" file. 
 
+This web crawler can be extended to gather data in domains beyond Walgreens.
+This again would only require you to modify the pageScraper.js file.
+ To start off,  you would need to modify the starting url to any website homepage.
+ Same as before, you navigate to the page where the products are listed. This scraper is currently developed to gather data from walgreen products.
+
+ However you can modify the code to gather data from other websites. You simply modify the selectors from the code block below using DevTools in order ti fit the website in which you want to gather data from.
+
+
+            ```
+            await page.waitForSelector('section#productSection');
+            let urls = await page.$$eval('.product-card-container > ul.product-container > li.card__product', links => {
+            links = links.map(el => el.querySelector('a').href)
+            return links;
+            });
+            ```
+
+In order to gather the attributes from the product listings, you would need to modify the selectors of the code block below to fit the selectors of the website in which you want to gather data from. 
 
 
             ```
@@ -15,3 +34,5 @@ This would require you to navigate to the
 			dataObj['productUPC'] = await newPage.$eval('div.inner > div > div > div.wag-accordion-shipping-content.mb20.ml20 > p.universal-Item-code', el => el.textContent);
             dataObj['sourceURL'] = await newPage.url('', el => el.textContent);
             ```
+
+Once that is done, you can enter the console command "npm run start" and the application will gather data from those products and have it outputed within a JSON file.

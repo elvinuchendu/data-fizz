@@ -13,10 +13,13 @@ const scraperObject = {
         
         console.log(`Navigating to Toilet Papers...`);
         await page.goto('https://www.walgreens.com/store/c/toilet-paper/ID=20000944-tier3' );
+		console.log(`Gathering Data...`);
 
-
+		// Wait for the required DOM to be rendered
 		await page.waitForSelector('section#productSection');
+		// Get the link to all the required products
 		let urls = await page.$$eval('.product-card-container > ul.product-container > li.card__product', links => {
+		// Extract the links from the data
 		links = links.map(el => el.querySelector('a').href)
 		return links;
 		});
