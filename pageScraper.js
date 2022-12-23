@@ -4,6 +4,7 @@ const scraperObject = {
 		let page = await browser.newPage();
 		console.log(`Navigating to ${this.url}...`);
 		await page.goto(this.url);
+		let scrapedData = [];
 
         console.log(`Navigating to Household Essentials...`);
         await page.goto('https://www.walgreens.com/store/c/household-essentials/ID=20000910-tier1?ban=dl_dl_FeatCategory_HouseholdEssentials_CONTROL' );
@@ -38,9 +39,10 @@ const scraperObject = {
 
 		for(link in urls){
 			let currentPageData = await pagePromise(urls[link]);
-			// scrapedData.push(currentPageData);
+			scrapedData.push(currentPageData);
 			console.log(currentPageData);
 		}
+		
 	}
 
 
